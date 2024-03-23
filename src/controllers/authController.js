@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user.js');
 const { validationResult } = require('express-validator');
 
-const saltRounds = 10;
-const jwtSecret = process.env.JWT_SECRET || 'your_default_secret';
+// const saltRounds = 10;
+// const jwtSecret = process.env.JWT_SECRET || 'your_default_secret';
 
 const signup = async (req, res) => {
   // Validate inputs
@@ -16,7 +16,7 @@ const signup = async (req, res) => {
   }
 
   // Extract user data from request body
-  const { fullName, email, phoneNumber, userType, carNumber, password } = req.body;
+  const { fullName, email, phoneNumber, password } = req.body;
 
   try {
     // Check if the user already exists
@@ -33,8 +33,6 @@ const signup = async (req, res) => {
       fullName,
       email,
       phoneNumber,
-      userType,
-      carNumber,
       password: hashedPassword,
     });
 

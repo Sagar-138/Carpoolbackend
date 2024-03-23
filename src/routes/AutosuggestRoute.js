@@ -1,4 +1,3 @@
-
 // AutosuggestRoute.js
 
 const express = require('express');
@@ -17,4 +16,5 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
+
 

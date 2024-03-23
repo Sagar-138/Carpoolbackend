@@ -14,7 +14,7 @@ const generateToken = require('./src/services/tokengeneration.js');
 const AutosuggestRoute = require('./src/routes/AutosuggestRoute.js')
 // const proxy =require('./src/services/proxyConfig.js')
 
-
+let latestToken = "";
 // Load environment variables from .env file
 dotenv.config();
 
@@ -35,7 +35,8 @@ app.use(bodyParser.json());
     console.log('MongoDB connection status:', dbConnection.readyState);
 
     // Generate token when server starts
-    const token = await generateToken();
+    let token = await generateToken();
+    console.log(token);
     console.log('Token generated:', token);
 
     // Set up routes
@@ -47,9 +48,18 @@ app.use(bodyParser.json());
     // Generate token route
     app.get('/generate-token', async (req, res) => {
       try {
-        const token = await generateToken();
+        token = await generateToken();
         res.status(200).json({ token });
 
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    });
+
+    // Read token route
+    app.get('/getToken', async (req, res) => {
+      try {
+        res.status(200).json({ token });
       } catch (error) {
         res.status(500).json({ error: error.message });
       }

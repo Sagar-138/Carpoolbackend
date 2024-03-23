@@ -15,22 +15,13 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  },
-  userType: {
-    type: String,
-    enum: ['passenger', 'driver'],
-    required: true,
-  },
+    },
   phoneNumber: {
     type: String,
     required: true,
   },
-  carNumber: {
-    type: String,
-    required: function () {
-      return this.userType === 'driver';
-    },
-  },
+
+  
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

@@ -16,8 +16,6 @@ router.post(
     body('fullName').notEmpty().withMessage('Full name is required'),
     body('email').isEmail().withMessage('Invalid email format'),
     body('phoneNumber').isMobilePhone().withMessage('Invalid phone number format'),
-    body('userType').isIn(['passenger', 'driver']).withMessage('Invalid user type'),
-    body('carNumber').if(body('userType').equals('driver')).notEmpty().withMessage('Car number is required for drivers'),
     body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
     body('confirmPassword').custom((value, { req }) => {
       if (value !== req.body.password) {
