@@ -1,32 +1,35 @@
-//ride.js
 const mongoose = require('mongoose');
 
 const rideSchema = new mongoose.Schema({
-  driver: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to the User model (assuming you have a User model)
-    required: true,
-  },
-  origin: {
+ 
+  startLocation: {
     type: String,
     required: true,
   },
-  destination: {
+  endLocation: {
     type: String,
     required: true,
   },
-  departureTime: {
-    type: Date,
+  date: {
+    type: Date, // Assuming the date of the ride
     required: true,
   },
-  availableSeats: {
+  time: {
+    type: String, // Assuming the time of the ride as a string
+    required: true,
+  },
+  seatsAvailable: {
     type: Number,
     required: true,
   },
-  passengers: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to the User model for passengers
-  }],
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
+  carName: {
+    type: String,
+    required: true,
+  },
   vehicleType: {
     type: String,
     // You can set an enum with allowed vehicle types if needed
@@ -36,7 +39,7 @@ const rideSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 rideSchema.virtual('vacantSeats').get(function () {
-  return this.availableSeats - this.passengers.length;
+  return this.seatsAvailable - this.passengers.length;
 });
 
 const Ride = mongoose.model('Ride', rideSchema);

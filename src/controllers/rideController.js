@@ -5,22 +5,23 @@ const Ride = require('../models/ride.js'); // Import the Ride model
 // Controller for creating a new ride
 exports.createRide = async (req, res) => {
   try {
-    const { driver, origin, destination, departureTime, availableSeats, vehicleType } = req.body;
+    const { startLocation, endLocation, date, time, seatsAvailable, phoneNumber, carName } = req.body;
 
     // Create a new ride
     const newRide = new Ride({
-      driver,
-      origin,
-      destination,
-      departureTime,
-      availableSeats,
-      vehicleType,
+      startLocation,
+      endLocation,
+      date,
+      time,
+      seatsAvailable,
+      phoneNumber,
+      carName,
     });
 
     // Save the ride to the database
     await newRide.save();
 
-    res.status(201).json({ message: 'Ride created successfully' });
+    res.status(201).json({ message: 'Ride created successfully', ride: newRide });
   } catch (error) {
     console.error('Error creating ride:', error);
     res.status(500).json({ message: 'Internal Server Error' });

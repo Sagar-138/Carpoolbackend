@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./src/routes/authRoutes.js');
-// const rideRoutes = require('./src/routes/rideRoutes.js');
+const rideRoutes = require('./src/routes/rideRoutes.js');
 // const mapRoutes = require('./src/routes/mapRoutes.js');
 const errorHandler = require('./errorHandler.js');
 const { connectToDatabase } = require('./db.js');
@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 
     // Set up routes
     app.use('/auth', authRoutes);
-    // app.use('/rides', rideRoutes);
+    app.use('/rides', rideRoutes);
     // app.use('/maps', mapRoutes);
     app.use('/autosuggest', AutosuggestRoute);
 
