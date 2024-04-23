@@ -1,3 +1,4 @@
+//models/ride.js
 const mongoose = require('mongoose');
 
 const rideSchema = new mongoose.Schema({
@@ -28,6 +29,10 @@ const rideSchema = new mongoose.Schema({
   },
   carName: {
     type: String,
+    required: true,
+  },
+  price: {
+    type: Number, // Assuming the price is a number
     required: true,
   },
   vehicleType: {

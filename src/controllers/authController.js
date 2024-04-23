@@ -1,4 +1,4 @@
-// authController.js
+//controller/authController.js
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -77,7 +77,7 @@ const login = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
 
     // Send the token in the response
-    res.json({ token, userId: user._id, userType: user.userType });
+    res.json({ token, userId: user._id, username: user.fullName, userType: user.userType });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');

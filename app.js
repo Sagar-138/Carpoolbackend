@@ -17,6 +17,7 @@ const AutosuggestRoute = require('./src/routes/AutosuggestRoute.js')
 let latestToken = "";
 // Load environment variables from .env file
 dotenv.config();
+// const path = require('path');
 
 // Create an Express application
 const app = express();
@@ -36,13 +37,13 @@ app.use(bodyParser.json());
 
     // Generate token when server starts
     let token = await generateToken();
-    console.log(token);
-    console.log('Token generated:', token);
+    // console.log(token);
+    // console.log('Token generated:', token);
 
     // Set up routes
     app.use('/auth', authRoutes);
     app.use('/rides', rideRoutes);
-    // app.use('/maps', mapRoutes);
+    // app.use('/rides/filter', rideRoutes);
     app.use('/autosuggest', AutosuggestRoute);
 
     // Generate token route

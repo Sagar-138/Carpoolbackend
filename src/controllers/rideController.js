@@ -5,7 +5,7 @@ const Ride = require('../models/ride.js'); // Import the Ride model
 // Controller for creating a new ride
 exports.createRide = async (req, res) => {
   try {
-    const { startLocation, endLocation, date, time, seatsAvailable, phoneNumber, carName } = req.body;
+    const { startLocation, endLocation, date, time, seatsAvailable, phoneNumber, carName,  price,userId } = req.body;
 
     // Create a new ride
     const newRide = new Ride({
@@ -16,6 +16,8 @@ exports.createRide = async (req, res) => {
       seatsAvailable,
       phoneNumber,
       carName,
+      price ,
+      userId// Include price here
     });
 
     // Save the ride to the database
@@ -28,25 +30,27 @@ exports.createRide = async (req, res) => {
   }
 };
 
+
+
 // Controller for getting details of a specific ride
-exports.getRideDetails = async (req, res) => {
-  try {
-    const rideId = req.params.rideId;
+// exports.getRideDetails = async (req, res) => {
+//   try {
+//     const rideId = req.params.rideId;
 
-    // Find the ride by ID
-    const ride = await Ride.findById(rideId);
+//     // Find the ride by ID
+//     const ride = await Ride.findById(rideId);
 
-    // Check if the ride exists
-    if (!ride) {
-      return res.status(404).json({ message: 'Ride not found' });
-    }
+//     // Check if the ride exists
+//     if (!ride) {
+//       return res.status(404).json({ message: 'Ride not found' });
+//     }
 
-    res.status(200).json(ride);
-  } catch (error) {
-    console.error('Error getting ride details:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-};
+//     res.status(200).json(ride);
+//   } catch (error) {
+//     console.error('Error getting ride details:', error);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// };
 
 // Controller for getting all rides
 exports.getAllRides = async (req, res) => {
@@ -56,6 +60,32 @@ exports.getAllRides = async (req, res) => {
     res.status(200).json(rides);
   } catch (error) {
     console.error('Error getting rides:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+//location match api
+exports.getRidesByLocation = async (req, res) => {
+  try {
+    let { startLocation, endLocation } = req.query;
+
+    // Convert to lower case for case-insensitive comparison
+    startLocation = startLocation.toLowerCase();
+    endLocation = endLocation.toLowerCase();
+
+    // Find rides that match the startLocation and endLocation
+    const rides = await Ride.find({
+      startLocation: new RegExp('^' + startLocation + '$', 'i'),
+      endLocation: new RegExp('^' + endLocation + '$', 'i')
+    });
+
+    // Check if any rides are found
+    if (!rides.length) {
+      return res.status(404).json({ message: 'No rides found for the specified locations' });
+    }
+
+    res.status(200).json(rides);
+  } catch (error) {
+    console.error('Error getting rides by location:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
