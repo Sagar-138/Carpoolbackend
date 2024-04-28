@@ -18,18 +18,19 @@ router.get('/', rideController.getAllRides);
 // Route to delete a ride created by the driver
 // router.delete('/driver/:rideId/delete', rideController.deleteRide);
 
-
-
-
 // Route to create a new ride
 router.post('/create', rideController.createRide);
 
 // Route to get details of a specific ride
-// router.get('/:rideId', validateRideId, rideController.getRideDetails);
+router.get('/booked/:rideId', rideController.getBookedRideDetails);
 
 // Route to get all rides
 router.get('/', rideController.getAllRides);
 
 router.get('/filter', rideController.getRidesByLocation);
+
+// Route to book a ride
+router.post('/book', rideController.bookRide); // Add this route for booking rides
+
 
 module.exports = router;

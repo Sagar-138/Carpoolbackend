@@ -35,6 +35,10 @@ const rideSchema = new mongoose.Schema({
     type: Number, // Assuming the price is a number
     required: true,
   },
+  userId: {
+    type: String,
+    required: true,
+  },
   vehicleType: {
     type: String,
     // You can set an enum with allowed vehicle types if needed

@@ -5,9 +5,9 @@ const axios = require('axios');
 // Async function to generate a token
 async function generateToken() {
   // Define the required constants
-  const clientId = process.env.MAPMYINDIA_CLIENT_ID; // Replace with your actual client ID
-  const clientSecret = process.env.MAPMYINDIA_CLIENT_SECRET; // Replace with your actual client secret
-  const tokenUrl = 'https://outpost.mappls.com/api/security/oauth/token'; // Replace with your actual token URL
+  const clientId = process.env.MAPMYINDIA_CLIENT_ID; 
+  const clientSecret = process.env.MAPMYINDIA_CLIENT_SECRET; 
+  const tokenUrl = 'https://outpost.mappls.com/api/security/oauth/token'; 
 
   // Combine the client ID, secret, and URL, then encode them to Base64
   const combinedCredentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
