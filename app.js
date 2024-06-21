@@ -68,7 +68,7 @@ app.use(bodyParser.json());
 
     // Default route
     app.get('/', (req, res) => {
-      res.send('Welcome to the Carpool Web Application!');
+      res.send('Welcome to the Hitchify!');
     });
 
     // Error handling middleware

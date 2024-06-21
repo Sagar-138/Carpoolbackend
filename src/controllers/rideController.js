@@ -2,7 +2,8 @@
 
 const Ride = require('../models/ride.js'); // Import the Ride model
 const BookedRide = require('../models/bookedRides.js');
-
+const Notification = require('../models/notifications.js');
+// const { sendNotificationToDriver } = require('./rideController');
 
 // Controller for creating a new ride
 exports.createRide = async (req, res) => {

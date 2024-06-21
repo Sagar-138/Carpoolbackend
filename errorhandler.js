@@ -13,7 +13,6 @@ const errorHandler = (err, req, res, next) => {
     return res.status(400).json({ message: 'Duplicate key error', errors: err.keyValue });
   }
 
-  // Handle other errors
   res.status(500).json({ message: 'Internal Server Error' });
 };
 
